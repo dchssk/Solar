@@ -37,8 +37,10 @@ public struct Solar {
     
     public fileprivate(set) var sunrise: Date?
     public fileprivate(set) var sunset: Date?
-    public fileprivate(set) var civilSunrise: Date?
-    public fileprivate(set) var civilSunset: Date?
+	public fileprivate(set) var civilSunrise: Date?
+	public fileprivate(set) var civilSunset: Date?
+	public fileprivate(set) var twilightSunrise: Date?
+	public fileprivate(set) var twilightSunset: Date?
     public fileprivate(set) var nauticalSunrise: Date?
     public fileprivate(set) var nauticalSunset: Date?
     public fileprivate(set) var astronomicalSunrise: Date?
@@ -66,8 +68,10 @@ public struct Solar {
     public mutating func calculate() {
         sunrise = calculate(.sunrise, for: date, and: .official)
         sunset = calculate(.sunset, for: date, and: .official)
-        civilSunrise = calculate(.sunrise, for: date, and: .civil)
-        civilSunset = calculate(.sunset, for: date, and: .civil)
+		civilSunrise = calculate(.sunrise, for: date, and: .civil)
+		civilSunset = calculate(.sunset, for: date, and: .civil)
+		twilightSunrise = calculate(.sunrise, for: date, and: .twilight)
+		twilightSunset = calculate(.sunset, for: date, and: .twilight)
         nauticalSunrise = calculate(.sunrise, for: date, and: .nautical)
         nauticalSunset = calculate(.sunset, for: date, and: .nautical)
         astronomicalSunrise = calculate(.sunrise, for: date, and: .astronimical)
@@ -84,7 +88,8 @@ public struct Solar {
     /// Used for generating several of the possible sunrise / sunset times
     fileprivate enum Zenith: Double {
         case official = 90.83
-        case civil = 96
+		case civil = 96
+		case twilight = 97.2140
         case nautical = 102
         case astronimical = 108
     }
